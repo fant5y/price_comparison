@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import streamlit as st
 
+st.set_page_config(page_title="Some Calculations", layout="wide")
 
 # Define constants
 CSV_PATH = "materials.csv"
@@ -19,6 +20,7 @@ EMPTY_MATERIAL_DATA = {
     "price_per_unit": [],
     "price_per_qm": [],
 }
+
 
 
 # Function to load data from csv file or return an empty dataframe
@@ -78,7 +80,7 @@ def calculate_prices(material_list):
     return material_list
 
 
-st.set_page_config(page_title="Some Calculations", layout="wide")
+
 st.title("Calculations")
 col0, col1, col2, col3, col4 = st.columns(
     [2, 1, 1, 1, 1],
