@@ -148,7 +148,7 @@ st.download_button(
 
 st.bar_chart(material_data, x="product_identifier", y="price_per_qm")
 
-st.data_editor(
+edited_material_data = st.data_editor(
     material_data,
     column_order=output_order,
     column_config={
@@ -158,8 +158,10 @@ st.data_editor(
         "width": st.column_config.NumberColumn("Width in mm", format="%d mm"),
         "length": st.column_config.NumberColumn("Length in mm", format="%d mm"),
         "height": st.column_config.NumberColumn("Height in mm", format="%d mm"),
-        "qm": st.column_config.NumberColumn("Square Meter", format="%d m²"),
-        "link": st.column_config.LinkColumn("Product URL"),
+        "qm": st.column_config.NumberColumn("Square Meter", format="%.4f m²"),
+        "link": st.column_config.LinkColumn("Product URL", ),
         "product_identifier": st.column_config.TextColumn("Product")
-    }
+    }, hide_index=True, num_rows="dynamic"
 )
+
+help(edited_material_data)
