@@ -164,4 +164,4 @@ edited_material_data = st.data_editor(
     }, hide_index=True, num_rows="dynamic"
 )
 
-help(edited_material_data)
+st.help(edited_material_data)
