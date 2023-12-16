@@ -151,6 +151,6 @@ st.data_editor(
     material_data,
     column_order=output_order,
     column_config={
-        "price":st.column_config.NumberColumn("Price”, format=”%d €")
+        "price":st.column_config.NumberColumn("Price", format="%d €")
     }
 )
