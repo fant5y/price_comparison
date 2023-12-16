@@ -42,10 +42,11 @@ def append_to_csv(dataframe, csv_file_path, sep=","):
             updated_df.drop_duplicates(inplace=True)
 
             updated_df.to_csv(csv_file_path, index=False, sep=sep)
+            st.info(f"Updated Data in CSV: {csv_file_path}", icon="💾")
         else:
             # File exists but is empty, write the dataframe
             dataframe.to_csv(csv_file_path, index=False, sep=sep)
-        st.info(f"Saved Data to the CSV: {csv_file_path}", icon="💾")
+            st.info(f"Saved Data to the new CSV: {csv_file_path}", icon="💾")
     else:
         # File does not exist, write the dataframe
         dataframe.to_csv(csv_file_path, index=False, sep=sep)
