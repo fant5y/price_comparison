@@ -43,6 +43,7 @@ def append_to_csv(dataframe, csv_file_path, sep=","):
         else:
             # File exists but is empty, write the dataframe
             dataframe.to_csv(csv_file_path, index=False, sep=sep)
+        st.notify(f"Saved Data to the CSV: {csv_file_path}")
     else:
         # File does not exist, write the dataframe
         dataframe.to_csv(csv_file_path, index=False, sep=sep)
