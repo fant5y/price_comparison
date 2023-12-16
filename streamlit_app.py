@@ -5,11 +5,8 @@ import streamlit as st
 
 
 # Define constants
-CSV_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "..",
-    "data/materials.csv",
-)
+CSV_PATH = "materials.csv"
+
 EMPTY_MATERIAL_DATA = {
     "width": [],
     "length": [],
