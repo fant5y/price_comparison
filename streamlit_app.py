@@ -89,7 +89,7 @@ material_df = load_material_data(CSV_PATH, EMPTY_MATERIAL_DATA)
 if "data" not in st.session_state:
     st.session_state.material_df = material_df.to_dict()
 
-with st.sidebar():
+with st.sidebar:
     st.text_input(label="Product Name or Number", key="product_identifier")
     st.text_input(label="URL", key="link")
     st.number_input(label="Length", step=10, key="material_length", help="in mm")
