@@ -5,6 +5,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Some Calculations", layout="wide")
 
+
 # Define constants
 CSV_PATH = "materials.csv"
 
@@ -149,4 +150,7 @@ st.bar_chart(material_data, x="product_identifier", y="price_per_qm")
 st.data_editor(
     material_data,
     column_order=output_order,
+    column_config={
+        "price":st.column_config.NumberColumn("Price”, format=”%d €")
+    }
 )
