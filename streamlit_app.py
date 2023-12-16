@@ -115,6 +115,7 @@ with st.sidebar:
             EMPTY_MATERIAL_DATA[key].append(value)
         material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
         append_to_csv(material_df, CSV_PATH)
+        st.session_state.clear()
 
 output_order = [
     "product_identifier",
