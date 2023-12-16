@@ -101,8 +101,8 @@ with st.sidebar:
     st.number_input(label="Height", step=10, key="material_height", help="in mm")
     st.number_input(label="Amount", step=1, key="material_amount")
     st.number_input(label="Price", step=1.0, key="material_price", help="in €")
-    
-    if st.button("Calculate"):
+
+    if st.button("Calculate and Save", use_container_width=True):
         input_values = [
             st.session_state.get("material_width", None),
             st.session_state.get("material_length", None),
@@ -112,11 +112,12 @@ with st.sidebar:
             st.session_state.get("link", None),
             st.session_state.get("product_identifier", None),
         ]
-    
+
         input_values = calculate_prices(input_values)
-    
+
         for key, value in zip(EMPTY_MATERIAL_DATA.keys(), input_values):
             EMPTY_MATERIAL_DATA[key].append(value)
+
         material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
         append_to_csv(material_df, CSV_PATH)
         st.session_state.clear()
