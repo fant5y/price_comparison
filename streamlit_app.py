@@ -146,7 +146,7 @@ st.download_button(
 )
 
 st.bar_chart(material_data, x="product_identifier", y="price_per_qm")
-st.dataframe(
+st.data_editor(
     material_data,
     column_order=output_order,
 )
