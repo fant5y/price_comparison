@@ -97,24 +97,24 @@ with st.sidebar:
     st.number_input(label="Height", step=10, key="material_height", help="in mm")
     st.number_input(label="Amount", step=1, key="material_amount")
     st.number_input(label="Price", step=1.0, key="material_price", help="in €")
-
-if st.button("Calculate"):
-    input_values = [
-        st.session_state.get("material_width", None),
-        st.session_state.get("material_length", None),
-        st.session_state.get("material_height", None),
-        st.session_state.get("material_amount", None),
-        st.session_state.get("material_price", None),
-        st.session_state.get("link", None),
-        st.session_state.get("product_identifier", None),
-    ]
-
-    input_values = calculate_prices(input_values)
-
-    for key, value in zip(EMPTY_MATERIAL_DATA.keys(), input_values):
-        EMPTY_MATERIAL_DATA[key].append(value)
-    material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
-    append_to_csv(material_df, CSV_PATH)
+    
+    if st.button("Calculate"):
+        input_values = [
+            st.session_state.get("material_width", None),
+            st.session_state.get("material_length", None),
+            st.session_state.get("material_height", None),
+            st.session_state.get("material_amount", None),
+            st.session_state.get("material_price", None),
+            st.session_state.get("link", None),
+            st.session_state.get("product_identifier", None),
+        ]
+    
+        input_values = calculate_prices(input_values)
+    
+        for key, value in zip(EMPTY_MATERIAL_DATA.keys(), input_values):
+            EMPTY_MATERIAL_DATA[key].append(value)
+        material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
+        append_to_csv(material_df, CSV_PATH)
 
 output_order = [
     "product_identifier",
