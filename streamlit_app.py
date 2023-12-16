@@ -69,7 +69,7 @@ def calculate_prices(material_list):
     material_list.append(price_per_unit)
     material_list.append(price_per_qm)
 
-    with st.sidebar():
+    with st.sidebar:
         st.write(f"{qm:.2f} qm")
         st.write(f"{price_per_qm:.2f} € per qm")
         st.write(f"{price_per_unit:.2f} € per unit")
