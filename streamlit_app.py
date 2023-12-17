@@ -181,6 +181,6 @@ edited_material_data = st.data_editor(
     }, hide_index=True, num_rows="dynamic"
 )
 
-if st.button('Save Changes', key='save-changes'):
+if st.button('Save Changes', key='save_changes'):
     print(edited_material_data)
     # update_csv(edited_material_data)
