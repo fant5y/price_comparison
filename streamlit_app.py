@@ -40,7 +40,7 @@ def load_material_data():
     return pd.read_csv(CSV_PATH)
 
 
-def append_to_csv(dataframe, sep=",", notify):
+def append_to_csv(dataframe,  notify, sep=","):
     if os.path.isfile(CSV_PATH):
         if os.path.getsize(CSV_PATH) > 0:
             # File exists and is not empty, load its data
@@ -63,7 +63,7 @@ def append_to_csv(dataframe, sep=",", notify):
         dataframe.to_csv(CSV_PATH, index=False, sep=sep)
 
 
-def update_csv(dataframe, sep=",", notify):
+def update_csv(dataframe, notify, sep=",",):
     # This function is to be used when existing data is updated
     dataframe.to_csv(CSV_PATH, index=False, sep=sep)
     notify.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
@@ -122,6 +122,8 @@ with st.sidebar:
                     help="in mm")
     st.number_input(label="Amount", step=1, key="material_amount")
     st.number_input(label="Price", step=1.0, key="material_price", help="in €")
+
+    notify = st.empty()
 
     if st.button("Calculate and Save", use_container_width=True):
         input_values = [
