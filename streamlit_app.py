@@ -51,11 +51,13 @@ def append_to_csv(dataframe, sep=","):
             updated_df.drop_duplicates(inplace=True)
 
             updated_df.to_csv(CSV_PATH, index=False, sep=sep)
-            st.info(f"Updated Data in CSV: {CSV_PATH}", icon="💾")
+            notify.info(f"Updated Data in CSV: {CSV_PATH}", icon="💾")
+            time.sleep(1)
         else:
             # File exists but is empty, write the dataframe
             dataframe.to_csv(CSV_PATH, index=False, sep=sep)
-            st.info(f"Saved Data to the new CSV: {CSV_PATH}", icon="💾")
+            notify.info(f"Saved Data to the new CSV: {CSV_PATH}", icon="💾")
+            time.sleep(1)
     else:
         # File does not exist, write the dataframe
         dataframe.to_csv(CSV_PATH, index=False, sep=sep)
@@ -64,7 +66,8 @@ def append_to_csv(dataframe, sep=","):
 def update_csv(dataframe, sep=","):
     # This function is to be used when existing data is updated
     dataframe.to_csv(CSV_PATH, index=False, sep=sep)
-    st.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
+    notify.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
+    time.sleep(1)
 
 
 def calculate_prices(material_list):
@@ -141,6 +144,8 @@ with st.sidebar:
         append_to_csv(material_df)
         st.session_state.clear()
 
+    notify = st.empty()
+
 output_order = [
     "product_identifier",
     "price_per_qm",
@@ -193,9 +198,9 @@ edited_material_data = st.data_editor(
 )
 
 if st.button('Save Changes'):
-    st.info("Saving changes...")
+    notify.info("Saving changes...")
     time.sleep(0.5)
     update_csv(edited_material_data)
-    st.info("Changes saved. At least I think they are saved.")
+    notify.info("Changes saved. At least I think they are saved.")
     time.sleep(0.5)
     st.rerun()
