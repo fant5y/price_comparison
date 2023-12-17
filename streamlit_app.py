@@ -145,7 +145,7 @@ with st.sidebar:
                                              orient="columns")
         append_to_csv(material_df, notify)
         st.session_state.clear()
-        st.session_state.
+
 
     notify = st.empty()
 
