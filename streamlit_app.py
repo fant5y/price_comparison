@@ -32,25 +32,31 @@ def load_material_data(csv_path, empty_data):
         return pd.DataFrame(empty_data)
 
 
-def append_to_csv(dataframe, csv_file_path, sep=","):
-    if os.path.isfile(csv_file_path):
-        if os.path.getsize(csv_file_path) > 0:
+def append_to_csv(dataframe, sep=","):
+    if os.path.isfile(CSV_PATH):
+        if os.path.getsize(CSV_PATH) > 0:
             # File exists and is not empty, load its data
-            existing_df = pd.read_csv(csv_file_path, sep=sep)
+            existing_df = pd.read_csv(CSV_PATH, sep=sep)
             updated_df = pd.concat([existing_df, dataframe])
 
             # Avoiding duplicates
             updated_df.drop_duplicates(inplace=True)
 
-            updated_df.to_csv(csv_file_path, index=False, sep=sep)
-            st.info(f"Updated Data in CSV: {csv_file_path}", icon="💾")
+            updated_df.to_csv(CSV_PATH, index=False, sep=sep)
+            st.info(f"Updated Data in CSV: {CSV_PATH}", icon="💾")
         else:
             # File exists but is empty, write the dataframe
-            dataframe.to_csv(csv_file_path, index=False, sep=sep)
-            st.info(f"Saved Data to the new CSV: {csv_file_path}", icon="💾")
+            dataframe.to_csv(CSV_PATH, index=False, sep=sep)
+            st.info(f"Saved Data to the new CSV: {CSV_PATH}", icon="💾")
     else:
         # File does not exist, write the dataframe
-        dataframe.to_csv(csv_file_path, index=False, sep=sep)
+        dataframe.to_csv(CSV_PATH, index=False, sep=sep)
+
+
+def update_csv(dataframe, sep=","):
+    # This function is to be used when existing data is updated
+    dataframe.to_csv(CSV_PATH, index=False, sep=sep)
+    st.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
 
 
 def calculate_prices(material_list):
@@ -120,7 +126,7 @@ with st.sidebar:
             EMPTY_MATERIAL_DATA[key].append(value)
 
         material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
-        append_to_csv(material_df, CSV_PATH)
+        append_to_csv(material_df)
         st.session_state.clear()
 
 output_order = [
@@ -161,7 +167,5 @@ edited_material_data = st.data_editor(
         "qm": st.column_config.NumberColumn("Square Meter", format="%.4f m²"),
         "link": st.column_config.LinkColumn("Product URL", ),
         "product_identifier": st.column_config.TextColumn("Product")
-    }, hide_index=True, num_rows="dynamic"
+    }, hide_index=True, num_rows="dynamic", on_change=update_csv
 )
-
-st.help(edited_material_data)
