@@ -40,7 +40,7 @@ def load_material_data():
     return pd.read_csv(CSV_PATH)
 
 
-def append_to_csv(dataframe,  notify, sep=","):
+def append_to_csv(dataframe, notify, sep=","):
     if os.path.isfile(CSV_PATH):
         if os.path.getsize(CSV_PATH) > 0:
             # File exists and is not empty, load its data
@@ -63,7 +63,7 @@ def append_to_csv(dataframe,  notify, sep=","):
         dataframe.to_csv(CSV_PATH, index=False, sep=sep)
 
 
-def update_csv(dataframe, notify, sep=",",):
+def update_csv(dataframe, notify, sep=",", ):
     # This function is to be used when existing data is updated
     dataframe.to_csv(CSV_PATH, index=False, sep=sep)
     notify.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
@@ -117,11 +117,14 @@ with st.sidebar:
     st.text_input(label="URL", key="link", value=None)
     st.number_input(label="Length", step=10, key="material_length",
                     help="in mm", value=None)
-    st.number_input(label="Width", step=10, key="material_width", help="in mm", value=None)
+    st.number_input(label="Width", step=10, key="material_width", help="in mm",
+                    value=None)
     st.number_input(label="Height", step=1.0, key="material_height",
                     help="in mm", value=None)
-    st.number_input(label="Amount", step=1.0, key="material_amount", value=None)
-    st.number_input(label="Price", step=1.0, key="material_price", help="in €", value=None)
+    st.number_input(label="Amount", step=1.0, key="material_amount",
+                    value=None)
+    st.number_input(label="Price", step=1.0, key="material_price", help="in €",
+                    value=None)
 
     notify = st.empty()
 
