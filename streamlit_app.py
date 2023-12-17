@@ -167,5 +167,8 @@ edited_material_data = st.data_editor(
         "qm": st.column_config.NumberColumn("Square Meter", format="%.4f m²"),
         "link": st.column_config.LinkColumn("Product URL", ),
         "product_identifier": st.column_config.TextColumn("Product")
-    }, hide_index=True, num_rows="dynamic", on_change=update_csv
+    }, hide_index=True, num_rows="dynamic"
 )
+
+if st.button('Save Changes'):
+    update_csv(edited_material_data, CSV_PATH)
