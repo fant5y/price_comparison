@@ -113,7 +113,7 @@ if "material_df" not in st.session_state:
     st.session_state.material_df = material_df.to_dict()
 
 with st.sidebar:
-    st.text_input(label="Product Name or Number", key="product_identifier", value=None)
+    st.text_input(label="Product Name or Number", key="product_identifier")
     st.text_input(label="URL", key="link", value=None)
     st.number_input(label="Length", step=10, key="material_length",
                     help="in mm", value=None)
@@ -145,7 +145,7 @@ with st.sidebar:
                                              orient="columns")
         append_to_csv(material_df, notify)
         st.session_state.clear()
-
+        st.rerun()
 
     notify = st.empty()
 
