@@ -118,9 +118,9 @@ with st.sidebar:
     st.number_input(label="Length", step=10, key="material_length",
                     help="in mm", value=None)
     st.number_input(label="Width", step=10, key="material_width", help="in mm", value=None)
-    st.number_input(label="Height", step=10, key="material_height",
+    st.number_input(label="Height", step=1.0, key="material_height",
                     help="in mm", value=None)
-    st.number_input(label="Amount", step=1, key="material_amount", value=None)
+    st.number_input(label="Amount", step=1.0, key="material_amount", value=None)
     st.number_input(label="Price", step=1.0, key="material_price", help="in €", value=None)
 
     notify = st.empty()
