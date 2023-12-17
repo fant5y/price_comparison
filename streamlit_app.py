@@ -113,15 +113,15 @@ if "material_df" not in st.session_state:
     st.session_state.material_df = material_df.to_dict()
 
 with st.sidebar:
-    st.text_input(label="Product Name or Number", key="product_identifier", value="")
-    st.text_input(label="URL", key="link", value="")
+    st.text_input(label="Product Name or Number", key="product_identifier", value=None)
+    st.text_input(label="URL", key="link", value=None)
     st.number_input(label="Length", step=10, key="material_length",
-                    help="in mm", value="")
-    st.number_input(label="Width", step=10, key="material_width", help="in mm", value="")
+                    help="in mm", value=None)
+    st.number_input(label="Width", step=10, key="material_width", help="in mm", value=None)
     st.number_input(label="Height", step=10, key="material_height",
-                    help="in mm", value="")
-    st.number_input(label="Amount", step=1, key="material_amount", value="")
-    st.number_input(label="Price", step=1.0, key="material_price", help="in €", value="")
+                    help="in mm", value=None)
+    st.number_input(label="Amount", step=1, key="material_amount", value=None)
+    st.number_input(label="Price", step=1.0, key="material_price", help="in €", value=None)
 
     notify = st.empty()
 
