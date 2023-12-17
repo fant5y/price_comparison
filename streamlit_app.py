@@ -200,7 +200,10 @@ edited_material_data = st.data_editor(
 if st.button('Save Changes'):
     notify.info("Saving changes...")
     time.sleep(0.5)
-    update_csv(edited_material_data)
-    notify.info("Changes saved. At least I think they are saved.")
-    time.sleep(0.5)
+    try:
+        update_csv(edited_material_data)
+        notify.success("Changes saved. *I think*", icon="✅")
+        time.sleep(1.5)
+    except Exception as e:
+        notify.error(f"Something went wrong 🤷‍♀️\n{e}", icon="❌")
     st.rerun()
