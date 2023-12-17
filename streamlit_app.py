@@ -40,7 +40,7 @@ def load_material_data():
     return pd.read_csv(CSV_PATH)
 
 
-def append_to_csv(dataframe, sep=","):
+def append_to_csv(dataframe, sep=",", notify):
     if os.path.isfile(CSV_PATH):
         if os.path.getsize(CSV_PATH) > 0:
             # File exists and is not empty, load its data
@@ -63,7 +63,7 @@ def append_to_csv(dataframe, sep=","):
         dataframe.to_csv(CSV_PATH, index=False, sep=sep)
 
 
-def update_csv(dataframe, sep=","):
+def update_csv(dataframe, sep=",", notify):
     # This function is to be used when existing data is updated
     dataframe.to_csv(CSV_PATH, index=False, sep=sep)
     notify.info(f"Updated data in CSV: {CSV_PATH}", icon="💾")
@@ -141,7 +141,7 @@ with st.sidebar:
 
         material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA,
                                              orient="columns")
-        append_to_csv(material_df)
+        append_to_csv(material_df, notify)
         st.session_state.clear()
 
     notify = st.empty()
@@ -201,7 +201,7 @@ if st.button('Save Changes'):
     notify.info("Saving changes...")
     time.sleep(0.5)
     try:
-        update_csv(edited_material_data)
+        update_csv(edited_material_data, notify)
         notify.success("Changes saved. *I think*", icon="✅")
         time.sleep(1.5)
     except Exception as e:
