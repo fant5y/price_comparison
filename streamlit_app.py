@@ -3,23 +3,23 @@ import os
 import pandas as pd
 import streamlit as st
 
-st.set_page_config(page_title="Some Calculations", layout="wide")
 
+st.set_page_config(page_title="Some Calculations", layout="wide")
 
 # Define constants
 CSV_PATH = "materials.csv"
 
 EMPTY_MATERIAL_DATA = {
-    "width": [],
-    "length": [],
-    "height": [],
-    "amount": [],
-    "price": [],
-    "link": [],
+    "width":              [],
+    "length":             [],
+    "height":             [],
+    "amount":             [],
+    "price":              [],
+    "link":               [],
     "product_identifier": [],
-    "qm": [],
-    "price_per_unit": [],
-    "price_per_qm": [],
+    "qm":                 [],
+    "price_per_unit":     [],
+    "price_per_qm":       [],
 }
 
 
@@ -95,26 +95,27 @@ def calculate_prices(material_list):
     return material_list
 
 
-
 st.title("Calculations")
 col0, col1, col2, col3, col4 = st.columns(
-    [2, 1, 1, 1, 1],
-    gap="small",
+        [2, 1, 1, 1, 1],
+        gap="small",
 )
-
 
 if "material_df" not in st.session_state:
     material_df = load_material_data()
     material_df["link"] = material_df["link"].astype(str)
-    material_df["product_identifier"] = material_df["product_identifier"].astype(str)
+    material_df["product_identifier"] = material_df[
+        "product_identifier"].astype(str)
     st.session_state.material_df = material_df.to_dict()
 
 with st.sidebar:
     st.text_input(label="Product Name or Number", key="product_identifier")
     st.text_input(label="URL", key="link")
-    st.number_input(label="Length", step=10, key="material_length", help="in mm")
+    st.number_input(label="Length", step=10, key="material_length",
+                    help="in mm")
     st.number_input(label="Width", step=10, key="material_width", help="in mm")
-    st.number_input(label="Height", step=10, key="material_height", help="in mm")
+    st.number_input(label="Height", step=10, key="material_height",
+                    help="in mm")
     st.number_input(label="Amount", step=1, key="material_amount")
     st.number_input(label="Price", step=1.0, key="material_price", help="in €")
 
@@ -134,7 +135,8 @@ with st.sidebar:
         for key, value in zip(EMPTY_MATERIAL_DATA.keys(), input_values):
             EMPTY_MATERIAL_DATA[key].append(value)
 
-        material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA, orient="columns")
+        material_df = pd.DataFrame.from_dict(EMPTY_MATERIAL_DATA,
+                                             orient="columns")
         append_to_csv(material_df)
         st.session_state.clear()
 
@@ -153,32 +155,40 @@ output_order = [
 
 material_data = load_material_data()
 material_data["link"] = material_data["link"].astype(str)
-material_data["product_identifier"] = material_data["product_identifier"].astype(str)
+material_data["product_identifier"] = material_data[
+    "product_identifier"].astype(str)
 
 csv_string = material_data.to_csv(index=False)
 
 st.download_button(
-    "Download Data as CSV",
-    data=csv_string,
-    file_name="Plywood Price Comparison.csv",
+        "Download Data as CSV",
+        data=csv_string,
+        file_name="Plywood Price Comparison.csv",
 )
 
 st.bar_chart(material_data, x="product_identifier", y="price_per_qm")
 
 edited_material_data = st.data_editor(
-    material_data,
-    column_order=output_order,
-    column_config={
-        "price": st.column_config.NumberColumn("Price", format="%.2f €"),
-        "price_per_qm": st.column_config.NumberColumn("Price/m²", format="%.2f €"),
-        "price_per_unit": st.column_config.NumberColumn("Price/Unit", format="%.2f €"),
-        "width": st.column_config.NumberColumn("Width in mm", format="%d mm"),
-        "length": st.column_config.NumberColumn("Length in mm", format="%d mm"),
-        "height": st.column_config.NumberColumn("Height in mm", format="%d mm"),
-        "qm": st.column_config.NumberColumn("Square Meter", format="%.4f m²"),
-        "link": st.column_config.LinkColumn("Product URL", ),
-        "product_identifier": st.column_config.TextColumn("Product")
-    }, hide_index=True, num_rows="dynamic"
+        material_data,
+        column_order=output_order,
+        column_config={
+            "price":              st.column_config.NumberColumn("Price",
+                                                                format="%.2f €"),
+            "price_per_qm":       st.column_config.NumberColumn("Price/m²",
+                                                                format="%.2f €"),
+            "price_per_unit":     st.column_config.NumberColumn("Price/Unit",
+                                                                format="%.2f €"),
+            "width":              st.column_config.NumberColumn("Width in mm",
+                                                                format="%d mm"),
+            "length":             st.column_config.NumberColumn("Length in mm",
+                                                                format="%d mm"),
+            "height":             st.column_config.NumberColumn("Height in mm",
+                                                                format="%d mm"),
+            "qm":                 st.column_config.NumberColumn("Square Meter",
+                                                                format="%.4f m²"),
+            "link":               st.column_config.LinkColumn("Product URL", ),
+            "product_identifier": st.column_config.TextColumn("Product")
+        }, hide_index=True, num_rows="dynamic",
 )
 
 if st.button('Save Changes'):
@@ -186,3 +196,4 @@ if st.button('Save Changes'):
     print(edited_material_data)
     update_csv(edited_material_data)
     st.info("Changes saved. At least I think they are saved.")
+    st.rerun()
