@@ -142,7 +142,7 @@ output_order = [
     "link",
 ]
 
-material_data = load_material_data(CSV_PATH, EMPTY_MATERIAL_DATA)
+material_data = load_material_data()
 
 csv_string = material_data.to_csv(index=False)
 
