@@ -31,13 +31,12 @@ def print_csv_file():
 # Function to load data from csv file or return an empty dataframe
 def load_material_data():
     if not os.path.isfile(CSV_PATH):
-        print_csv_file()
         return pd.DataFrame(EMPTY_MATERIAL_DATA)
     if os.path.getsize(CSV_PATH) <= 0:
-        return pd.DataFrame(EMPTY_MATERIAL_DATA)
-    else:
         print_csv_file()
-        return pd.read_csv(CSV_PATH)
+        return pd.DataFrame(EMPTY_MATERIAL_DATA)
+    print_csv_file()
+    return pd.read_csv(CSV_PATH)
 
 
 def append_to_csv(dataframe, sep=","):
