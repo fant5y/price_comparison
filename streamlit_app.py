@@ -113,15 +113,15 @@ if "material_df" not in st.session_state:
     st.session_state.material_df = material_df.to_dict()
 
 with st.sidebar:
-    st.text_input(label="Product Name or Number", key="product_identifier")
-    st.text_input(label="URL", key="link")
+    st.text_input(label="Product Name or Number", key="product_identifier", value="")
+    st.text_input(label="URL", key="link", value="")
     st.number_input(label="Length", step=10, key="material_length",
-                    help="in mm")
-    st.number_input(label="Width", step=10, key="material_width", help="in mm")
+                    help="in mm", value="")
+    st.number_input(label="Width", step=10, key="material_width", help="in mm", value="")
     st.number_input(label="Height", step=10, key="material_height",
-                    help="in mm")
-    st.number_input(label="Amount", step=1, key="material_amount")
-    st.number_input(label="Price", step=1.0, key="material_price", help="in €")
+                    help="in mm", value="")
+    st.number_input(label="Amount", step=1, key="material_amount", value="")
+    st.number_input(label="Price", step=1.0, key="material_price", help="in €", value="")
 
     notify = st.empty()
 
@@ -145,6 +145,7 @@ with st.sidebar:
                                              orient="columns")
         append_to_csv(material_df, notify)
         st.session_state.clear()
+        st.session_state.
 
     notify = st.empty()
 
