@@ -171,4 +171,4 @@ edited_material_data = st.data_editor(
 )
 
 if st.button('Save Changes'):
-    update_csv(edited_material_data, CSV_PATH)
+    update_csv(edited_material_data)
