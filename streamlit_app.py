@@ -106,6 +106,7 @@ col0, col1, col2, col3, col4 = st.columns(
 if "material_df" not in st.session_state:
     material_df = load_material_data()
     material_df["link"] = material_df["link"].astype(str)
+    material_df["product_identifier"] = material_df["product_identifier"].astype(str)
     st.session_state.material_df = material_df.to_dict()
 
 with st.sidebar:
@@ -152,6 +153,7 @@ output_order = [
 
 material_data = load_material_data()
 material_data["link"] = material_data["link"].astype(str)
+material_data["product_identifier"] = material_data["product_identifier"].astype(str)
 
 csv_string = material_data.to_csv(index=False)
 
