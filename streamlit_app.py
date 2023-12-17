@@ -195,7 +195,7 @@ edited_material_data = st.data_editor(
             "length":             st.column_config.NumberColumn("Length in mm",
                                                                 format="%d mm"),
             "height":             st.column_config.NumberColumn("Height in mm",
-                                                                format="%d mm"),
+                                                                format="%.1f mm"),
             "qm":                 st.column_config.NumberColumn("Square Meter",
                                                                 format="%.4f m²"),
             "link":               st.column_config.LinkColumn("Product URL", ),
