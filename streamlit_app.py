@@ -1,4 +1,5 @@
 import os
+import time
 
 import pandas as pd
 import streamlit as st
@@ -193,7 +194,8 @@ edited_material_data = st.data_editor(
 
 if st.button('Save Changes'):
     st.info("Saving changes...")
-    print(edited_material_data)
+    time.sleep(0.5)
     update_csv(edited_material_data)
     st.info("Changes saved. At least I think they are saved.")
+    time.sleep(0.5)
     st.rerun()
