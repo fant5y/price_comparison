@@ -25,11 +25,11 @@ EMPTY_MATERIAL_DATA = {
 
 
 # Function to load data from csv file or return an empty dataframe
-def load_material_data(csv_path, empty_data):
-    if os.path.isfile(csv_path):
-        return pd.read_csv(csv_path)
+def load_material_data():
+    if os.path.isfile(CSV_PATH):
+        return pd.read_csv(CSV_PATH)
     else:
-        return pd.DataFrame(empty_data)
+        return pd.DataFrame(EMPTY_MATERIAL_DATA)
 
 
 def append_to_csv(dataframe, sep=","):
@@ -95,7 +95,7 @@ col0, col1, col2, col3, col4 = st.columns(
     gap="small",
 )
 
-material_df = load_material_data(CSV_PATH, EMPTY_MATERIAL_DATA)
+material_df = load_material_data()
 
 if "data" not in st.session_state:
     st.session_state.material_df = material_df.to_dict()
@@ -170,5 +170,6 @@ edited_material_data = st.data_editor(
     }, hide_index=True, num_rows="dynamic"
 )
 
-if st.button('Save Changes'):
+if st.button('Save Changes', key='save-changes'):
+    st.write(edited_material_data)
     update_csv(edited_material_data)
