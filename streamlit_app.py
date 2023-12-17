@@ -23,15 +23,20 @@ EMPTY_MATERIAL_DATA = {
 }
 
 
+def print_csv_file():
+    with open(CSV_PATH, "r") as f:
+        print(f.read())
+
 
 # Function to load data from csv file or return an empty dataframe
 def load_material_data():
-    print(CSV_PATH)
     if not os.path.isfile(CSV_PATH):
+        print_csv_file()
         return pd.DataFrame(EMPTY_MATERIAL_DATA)
     if os.path.getsize(CSV_PATH) <= 0:
         return pd.DataFrame(EMPTY_MATERIAL_DATA)
     else:
+        print_csv_file()
         return pd.read_csv(CSV_PATH)
 
 
